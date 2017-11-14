@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fd51d7c-c2b0-4e0b-a9d1-93fb3938fe96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pp_alley_again.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pp_alley.py" afterPath="$PROJECT_DIR$/pp_alley.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predator_prey.py" afterPath="$PROJECT_DIR$/predator_prey.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/predator_prey_new.py" afterPath="$PROJECT_DIR$/predator_prey_new.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -56,8 +52,8 @@
       <file leaf-file-name="pp_alley.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pp_alley.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="99">
-              <caret line="396" column="164" lean-forward="false" selection-start-line="396" selection-start-column="164" selection-end-line="396" selection-end-column="164" />
+            <state relative-caret-position="60">
+              <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -331,27 +327,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>396</line>
+          <line>397</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>108</line>
+          <line>109</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>109</line>
+          <line>110</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>110</line>
+          <line>111</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>111</line>
+          <line>112</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
@@ -421,8 +417,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pp_alley.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="396" column="164" lean-forward="false" selection-start-line="396" selection-start-column="164" selection-end-line="396" selection-end-column="164" />
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>

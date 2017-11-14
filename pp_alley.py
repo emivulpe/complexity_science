@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# http://www.tandfonline.com/doi/full/10.1080/23737867.2017.1282843
 
 class PredatorPreyModel(object):
     def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, nu = 0.1, delta_time=0.02, B=4):
@@ -429,5 +430,90 @@ def main_alley():
     ax1.grid()
 
     plt.show()
+
+
+def main_alley2():
+    gc = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
+    populations_alley = gc.calculate_improved_euler_alley(0.02, 4000)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=1.0, nu=1.0)
+    # with 7500 gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=3.8)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=0.1)
+    gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=18.5185, nu=1.0)
+
+    populations_alley_competition = gc2.calculate_improved_euler_alley_competition(0.02, 7500)
+    print populations_alley
+    prey_populations_alley = populations_alley['prey']
+    predator_populations_alley= populations_alley['predator']
+    prey_populations_alley_competition = populations_alley_competition['prey']
+    predator_populations_alley_competition = populations_alley_competition['predator']
+    fig = plt.figure(figsize=(15, 5))
+    fig.subplots_adjust(wspace=0.5, hspace=0.3)
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+
+    """
+    ax1.plot(predator_populations_alley, 'r-', label='predator')
+    ax1.plot(prey_populations_alley, 'b-', label='prey')
+    # ax1.plot(z, 'g-', label='prey')
+    ax1.set_title("Dynamics in time")
+    ax1.set_xlabel("time")
+    ax1.grid()
+    ax1.legend(loc='best')
+    """
+    ax2.plot(prey_populations_alley_competition, predator_populations_alley_competition, color="blue")
+    ax2.set_xlabel("prey")
+    ax2.set_ylabel("predator")
+    ax2.set_title("Phase space")
+    ax2.grid()
+
+    ax1.plot(prey_populations_alley, predator_populations_alley, color="blue")
+    ax1.set_xlabel("prey")
+    ax1.set_ylabel("predator")
+    ax1.set_title("Phase space")
+    ax1.grid()
+    plt.show()
+
+def main_alley3():
+    gc = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
+    populations_alley = gc.calculate_improved_euler_alley(0.02, 4000)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=14.0, nu=1.0)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=16.0, nu=1.0)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=3.0, nu=0.75)
+    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=2.0) # different
+    gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=15.0, nu=1.0) # different
+
+    populations_alley_competition = gc2.calculate_improved_euler_alley_competition(0.02, 7500)
+    print populations_alley
+    prey_populations_alley = populations_alley['prey']
+    predator_populations_alley= populations_alley['predator']
+    prey_populations_alley_competition = populations_alley_competition['prey']
+    predator_populations_alley_competition = populations_alley_competition['predator']
+    fig = plt.figure(figsize=(15, 5))
+    fig.subplots_adjust(wspace=0.5, hspace=0.3)
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+
+    """
+    ax1.plot(predator_populations_alley, 'r-', label='predator')
+    ax1.plot(prey_populations_alley, 'b-', label='prey')
+    # ax1.plot(z, 'g-', label='prey')
+    ax1.set_title("Dynamics in time")
+    ax1.set_xlabel("time")
+    ax1.grid()
+    ax1.legend(loc='best')
+    """
+    ax2.plot(prey_populations_alley_competition, predator_populations_alley_competition, color="blue")
+    ax2.set_xlabel("prey")
+    ax2.set_ylabel("predator")
+    ax2.set_title("Phase space")
+    ax2.grid()
+
+    ax1.plot(prey_populations_alley, predator_populations_alley, color="blue")
+    ax1.set_xlabel("prey")
+    ax1.set_ylabel("predator")
+    ax1.set_title("Phase space")
+    ax1.grid()
+    plt.show()
+
 if __name__ == "__main__":
-    main_alley()
+    main_alley3()
