@@ -3,7 +3,7 @@ import numpy as np
 
 
 class PredatorPreyModel(object):
-    def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, delta_time=0.02):
+    def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, delta_time=0.02, B=4):
         """
         Sets default values for the following instance variables:
         Lotka-Volterra equation coefficients:
@@ -23,6 +23,7 @@ class PredatorPreyModel(object):
         self.predator_death_rate = predator_death_rate
         self.predator_growth_rate = predator_growth_rate
         self.delta_time=0.02
+        self.B = B
 
     def prey_change_no_interaction(self, prey):
         """
@@ -65,6 +66,25 @@ class PredatorPreyModel(object):
         # Calculate the rate of population change
         return predators * (self.predator_growth_rate * prey - self.predator_death_rate)
 
+    def prey_change_alley(self, prey, predators):
+        """
+        Calculates the change in prey population size using the Lotka-Volterra
+        equation for prey and the time delta defined in "self.dt"
+        """
+
+        # Calculate the rate of population change
+        return prey * self.prey_growth_rate - self.prey_death_rate * predators * prey
+
+
+    def predator_change_alley(self, prey, predators):
+        """
+        Calculates the change in predator population size using the
+        Lotka-Volterra equation for predators and the time delta defined in
+        "self.dt"
+        """
+
+        # Calculate the rate of population change
+        return (predators * self.predator_growth_rate * prey * (predators / (predators + self.B))) - self.predator_death_rate * predators
 
     def prey_change_competition(self, prey, predators):
         a12 = 0.9
@@ -100,6 +120,30 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
+
+    def calculate_improved_euler_alley(self, delta_time=0.02, iterations=100):
+        """
+        Calculates the predator/prey population growth for the given parameters
+        (Defined in the __init__ docstring). Returns the following dictionary:
+        {'predator': [predator population history as a list],
+         'prey': [prey population history as a list]}
+        """
+        predator_history = []
+        prey_history = []
+
+        for i in range(iterations):
+            xk_1 = self.prey_change_alley(self.prey, self.predators) * delta_time
+            yk_1 = self.predator_change_alley(self.prey, self.predators) * delta_time
+            xk_2 = self.prey_change_alley(self.prey + xk_1, self.predators + yk_1) * delta_time
+            yk_2 = self.predator_change_alley(self.prey + xk_1, self.predators + yk_1) * delta_time
+
+            self.prey = self.prey + (xk_1 + xk_2) / 2
+            self.predators = self.predators + (yk_1 + yk_2) / 2
+
+            predator_history.append(self.predators)
+            prey_history.append(self.prey)
+
+        return {'predator': predator_history, 'prey': prey_history}
 
 
     def calculate_improved_euler_no_interaction(self, delta_time=0.02, iterations=1000):
@@ -288,5 +332,33 @@ def main_no_interaction():
     ax2.set_title("Phase space")
     ax2.grid()
     plt.show()
+
+
+def main_alley():
+    gc = PredatorPreyModel(prey = 50, predators = 20, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.01, predator_death_rate=0.1, B=4)
+    populations = gc.calculate_improved_euler_alley(0.02, 10000)
+    print populations
+    prey_populations = populations['prey']
+    predator_populations = populations['predator']
+
+    fig = plt.figure(figsize=(15, 5))
+    fig.subplots_adjust(wspace=0.5, hspace=0.3)
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+
+    ax1.plot(predator_populations, 'r-', label='predator')
+    ax1.plot(prey_populations, 'b-', label='prey')
+    # ax1.plot(z, 'g-', label='prey')
+    ax1.set_title("Dynamics in time")
+    ax1.set_xlabel("time")
+    ax1.grid()
+    ax1.legend(loc='best')
+
+    ax2.plot(prey_populations, predator_populations, color="blue")
+    ax2.set_xlabel("prey")
+    ax2.set_ylabel("predator")
+    ax2.set_title("Phase space")
+    ax2.grid()
+    plt.show()
 if __name__ == "__main__":
-    main()
+    main_alley()
