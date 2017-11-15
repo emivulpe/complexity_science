@@ -1,10 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # http://www.tandfonline.com/doi/full/10.1080/23737867.2017.1282843
 
 class PredatorPreyModel(object):
-    def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, nu = 0.1, delta_time=0.02, B=4):
+
+    def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0,
+                 predator_growth_rate=0.075, nu=0.1, B=4): #add a parameter for the model
         """
         Sets default values for the following instance variables:
         Lotka-Volterra equation coefficients:
@@ -23,30 +26,8 @@ class PredatorPreyModel(object):
         self.prey_death_rate = prey_death_rate
         self.predator_death_rate = predator_death_rate
         self.predator_growth_rate = predator_growth_rate
-        self.delta_time=0.02
         self.B = B
         self.nu = nu
-
-    def prey_change_no_interaction(self, prey):
-        """
-        Calculates the change in prey population size using the Lotka-Volterra
-        equation for prey and the time delta defined in "self.dt"
-        """
-
-        # Calculate the rate of population change
-        return prey * self.prey_growth_rate - prey * self.prey_death_rate
-
-
-    def predator_change_no_interaction(self, predators):
-        """
-        Calculates the change in predator population size using the
-        Lotka-Volterra equation for predators and the time delta defined in
-        "self.dt"
-        """
-
-        # Calculate the rate of population change
-        return predators * self.predator_growth_rate - predators * self.predator_death_rate
-
 
     def prey_change_interaction(self, prey, predators):
         """
@@ -56,7 +37,6 @@ class PredatorPreyModel(object):
 
         # Calculate the rate of population change
         return prey * (self.prey_growth_rate - self.prey_death_rate * predators)
-
 
     def predator_change_interaction(self, prey, predators):
         """
@@ -77,7 +57,6 @@ class PredatorPreyModel(object):
         # Calculate the rate of population change
         return prey * self.prey_growth_rate - self.prey_death_rate * predators * prey
 
-
     def predator_change_alley(self, prey, predators):
         """
         Calculates the change in predator population size using the
@@ -86,7 +65,8 @@ class PredatorPreyModel(object):
         """
 
         # Calculate the rate of population change
-        return (predators * self.predator_growth_rate * prey * (predators / (predators + self.B))) - self.predator_death_rate * predators
+        return (predators * self.predator_growth_rate * prey * (
+        predators / (predators + self.B))) - self.predator_death_rate * predators
 
     def prey_change_alley_competition(self, prey, predators):
         """
@@ -97,7 +77,6 @@ class PredatorPreyModel(object):
         # Calculate the rate of population change
         return prey * self.prey_growth_rate - self.prey_death_rate * predators * prey
 
-
     def predator_change_alley_competition(self, prey, predators):
         """
         Calculates the change in predator population size using the
@@ -105,41 +84,26 @@ class PredatorPreyModel(object):
         "self.dt"
         """
 
-        # Calculate the rate of population change
-        t1 = 1.0 - predators / (self.nu * prey)
-        t2 = predators / (predators + self.B)
-        t3 = self.predator_growth_rate * predators * prey
-        t4 = t3 * t1 * t2
-        t0 = - predators * self.predator_death_rate
-
-        return (predators * self.predator_growth_rate * prey * (predators / (predators + self.B)) * (1 - predators / (self.nu * prey))) - (self.predator_death_rate * predators)
-
+        return (predators * self.predator_growth_rate * prey * (
+        predators / (predators + self.B) * (1 - predators / (self.nu * prey)))) - self.predator_death_rate * predators
 
     def prey_change_competition(self, prey, predators):
-        a12 = 0.9
-        k1 = 100
+
         return self.prey_growth_rate * prey * (1 - (prey + a12 * predators) / k1)
 
     def predator_change_competition(self, prey, predators):
-        a21 = 0.1
-        k2 = 100
+
         return self.predator_growth_rate * predators * (1 - (predators + a21 * prey) / k2)
 
-    def calculate_improved_euler_competition(self, delta_time=0.02, iterations=100):
-        """
-        Calculates the predator/prey population growth for the given parameters
-        (Defined in the __init__ docstring). Returns the following dictionary:
-        {'predator': [predator population history as a list],
-         'prey': [prey population history as a list]}
-        """
+    def improved_euler(self, prey_change_f, predator_change_f, delta_time=0.02, iterations=100):
         predator_history = []
         prey_history = []
 
         for i in range(iterations):
-            xk_1 = self.prey_change_competition(self.prey, self.predators) * delta_time
-            yk_1 = self.predator_change_competition(self.prey, self.predators) * delta_time
-            xk_2 = self.prey_change_competition(self.prey + xk_1, self.predators + yk_1) * delta_time
-            yk_2 = self.predator_change_competition(self.prey + xk_1, self.predators + yk_1) * delta_time
+            xk_1 = prey_change_f(self.prey, self.predators) * delta_time
+            yk_1 = predator_change_f(self.prey, self.predators) * delta_time
+            xk_2 = prey_change_f(self.prey + xk_1, self.predators + yk_1) * delta_time
+            yk_2 = predator_change_f(self.prey + xk_1, self.predators + yk_1) * delta_time
 
             self.prey = self.prey + (xk_1 + xk_2) / 2
             self.predators = self.predators + (yk_1 + yk_2) / 2
@@ -149,8 +113,7 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
-
-    def calculate_improved_euler_alley(self, delta_time=0.02, iterations=100):
+    def runge_kutta(self, prey_change_f, predator_change_f, delta_time=0.02, iterations=100):
         """
         Calculates the predator/prey population growth for the given parameters
         (Defined in the __init__ docstring). Returns the following dictionary:
@@ -161,113 +124,16 @@ class PredatorPreyModel(object):
         prey_history = []
 
         for i in range(iterations):
-            xk_1 = self.prey_change_alley(self.prey, self.predators) * delta_time
-            yk_1 = self.predator_change_alley(self.prey, self.predators) * delta_time
-            xk_2 = self.prey_change_alley(self.prey + xk_1, self.predators + yk_1) * delta_time
-            yk_2 = self.predator_change_alley(self.prey + xk_1, self.predators + yk_1) * delta_time
+            xk_1 = prey_change_f(self.prey, self.predators) * delta_time
+            yk_1 = predator_change_f(self.prey, self.predators) * delta_time
+            xk_2 = prey_change_f(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
+            yk_2 = predator_change_f(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
+            xk_3 = prey_change_f(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
+            yk_3 = predator_change_f(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
+            xk_4 = prey_change_f(self.prey + xk_3, self.predators + yk_3) * delta_time
+            yk_4 = predator_change_f(self.prey + xk_3, self.predators + yk_3) * delta_time
 
-            self.prey = self.prey + (xk_1 + xk_2) / 2
-            self.predators = self.predators + (yk_1 + yk_2) / 2
-
-            predator_history.append(self.predators)
-            prey_history.append(self.prey)
-
-        return {'predator': predator_history, 'prey': prey_history}
-
-    def calculate_improved_euler_alley_competition(self, delta_time=0.02, iterations=100):
-        """
-        Calculates the predator/prey population growth for the given parameters
-        (Defined in the __init__ docstring). Returns the following dictionary:
-        {'predator': [predator population history as a list],
-         'prey': [prey population history as a list]}
-        """
-        predator_history = []
-        prey_history = []
-
-        for i in range(iterations):
-            xk_1 = self.prey_change_alley_competition(self.prey, self.predators) * delta_time
-            yk_1 = self.predator_change_alley_competition(self.prey, self.predators) * delta_time
-            xk_2 = self.prey_change_alley_competition(self.prey + xk_1, self.predators + yk_1) * delta_time
-            yk_2 = self.predator_change_alley_competition(self.prey + xk_1, self.predators + yk_1) * delta_time
-
-            self.prey = self.prey + (xk_1 + xk_2) / 2
-            self.predators = self.predators + (yk_1 + yk_2) / 2
-
-            predator_history.append(self.predators)
-            prey_history.append(self.prey)
-
-        return {'predator': predator_history, 'prey': prey_history}
-
-
-    def calculate_improved_euler_no_interaction(self, delta_time=0.02, iterations=1000):
-        """
-        Calculates the predator/prey population growth for the given parameters
-        (Defined in the __init__ docstring). Returns the following dictionary:
-        {'predator': [predator population history as a list],
-         'prey': [prey population history as a list]}
-        """
-        predator_history = []
-        prey_history = []
-
-        for i in range(iterations):
-            xk_1 = self.prey_change_no_interaction(self.prey) * delta_time
-            yk_1 = self.predator_change_no_interaction(self.predators) * delta_time
-            xk_2 = self.prey_change_no_interaction(self.prey + xk_1) * delta_time
-            yk_2 = self.predator_change_no_interaction(self.predators + yk_1) * delta_time
-
-            self.prey = self.prey + (xk_1 + xk_2) / 2
-            self.predators = self.predators + (yk_1 + yk_2) / 2
-
-            predator_history.append(self.predators)
-            prey_history.append(self.prey)
-
-        return {'predator': predator_history, 'prey': prey_history}
-
-    def calculate_improved_euler(self, delta_time=0.02, iterations=1000):
-        """
-        Calculates the predator/prey population growth for the given parameters
-        (Defined in the __init__ docstring). Returns the following dictionary:
-        {'predator': [predator population history as a list],
-         'prey': [prey population history as a list]}
-        """
-        predator_history = []
-        prey_history = []
-
-        for i in range(iterations):
-            xk_1 = self.prey_change_interaction(self.prey, self.predators) * delta_time
-            yk_1 = self.predator_change_interaction(self.prey, self.predators) * delta_time
-            xk_2 = self.prey_change_interaction(self.prey + xk_1, self.predators + yk_1) * delta_time
-            yk_2 = self.predator_change_interaction(self.prey + xk_1, self.predators + yk_1) * delta_time
-
-            self.prey = self.prey + (xk_1 + xk_2) / 2
-            self.predators = self.predators + (yk_1 + yk_2) / 2
-
-            predator_history.append(self.predators)
-            prey_history.append(self.prey)
-
-        return {'predator': predator_history, 'prey': prey_history}
-
-    def calculate_runge_kutta(self, delta_time=0.02, iterations=1000):
-        """
-        Calculates the predator/prey population growth for the given parameters
-        (Defined in the __init__ docstring). Returns the following dictionary:
-        {'predator': [predator population history as a list],
-         'prey': [prey population history as a list]}
-        """
-        predator_history = []
-        prey_history = []
-
-        for i in range(iterations):
-            xk_1 = self.prey_change_interaction(self.prey, self.predators) * delta_time
-            yk_1 = self.predator_change_interaction(self.prey, self.predators) * delta_time
-            xk_2 = self.prey_change_interaction(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
-            yk_2 = self.predator_change_interaction(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
-            xk_3 = self.prey_change_interaction(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
-            yk_3 = self.predator_change_interaction(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
-            xk_4 = self.prey_change_interaction(self.prey + xk_3, self.predators + yk_3) * delta_time
-            yk_4 = self.predator_change_interaction(self.prey + xk_3, self.predators + yk_3) * delta_time
-
-            self.prey = self.prey + (xk_1 + 2*xk_2 + 2*xk_3 + xk_4) / 6
+            self.prey = self.prey + (xk_1 + 2 * xk_2 + 2 * xk_3 + xk_4) / 6
             self.predators = self.predators + (yk_1 + 2 * yk_2 + 2 * yk_3 + yk_4) / 6
 
             predator_history.append(self.predators)
@@ -275,22 +141,83 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
-    def find_fixed_points_alley_competition(self, r=100):
+
+
+    def find_fixed_points_alley_competition_iterative(self, r=100):
         fixed_points = []
+        fp = {}
         print "Looking for fixed points", self.prey, self.predators
         for x in range(1, r):
             for y in range(1, r):
 
-
-                #if prey >= 0 and predator >= 0 and prey < 1 and predator < 1:
+                # if prey >= 0 and predator >= 0 and prey < 1 and predator < 1:
                 #    print x, y, prey, predator
-                if (self.prey_change_alley_competition(float(x), float(y)) == 0.0) and (self.predator_change_alley_competition(float(x), float(y)) < 0.4) and (self.predator_change_alley_competition(float(x), float(y)) >= 0.0):
+                if (self.prey_change_alley_competition(float(x), float(y)) == 0.0) and (
+                    self.predator_change_alley_competition(float(x), float(y)) < 0.4) and (
+                    self.predator_change_alley_competition(float(x), float(y)) >= 0.0):
                     prey = self.prey_change_alley_competition(float(x), float(y))
                     predator = self.predator_change_alley_competition(float(x), float(y))
+                    if y not in fp.keys():
+                        fp[y] = (x, predator)
+                    else:
+                        if fp[y][1] > predator:
+                            fp[y] = (x, predator)
                     print x, y, prey, predator
-                    fixed_points.append((x, y))
-                    print('The system has a fixed point in %s,%s' % (x, y))
+        for y in fp.keys():
+            fixed_points.append((fp[y][0], y))
         return fixed_points
+
+    def find_fixed_points_allee_competition(self):
+        t1 = self.predator_death_rate / self.predator_growth_rate
+        t2 = self.prey_growth_rate + (self.prey_death_rate * self.B)
+        t3 = t2 / self.prey_growth_rate
+        t4 = self.prey_growth_rate / (2 * self.prey_death_rate * self.nu)
+        print t1
+        print t2
+        print t3
+        print t4
+        print (t1 * t3)
+
+        x_star = (t1 * t3) + t4
+        #x_star = ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B))/self.prey_growth_rate)) + (self.prey_growth_rate / (2 * self.prey_death_rate * self.nu))
+        y_star = self.prey_growth_rate / self.prey_death_rate
+        return (x_star, y_star)
+
+    def find_fixed_points_allee_competition3(self):
+        t1 = (self.predator_death_rate * self.predator_growth_rate) / self.prey_death_rate
+        t2 = 1 - (self.prey_growth_rate / (self.prey_death_rate * self.nu))
+        t3 = t2 / self.prey_growth_rate
+        t4 = self.prey_growth_rate / (2 * self.prey_death_rate * self.nu)
+        x_star = (t1 * t3) + t4
+        # x_star = ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B))/self.prey_growth_rate)) + (self.prey_growth_rate / (2 * self.prey_death_rate * self.nu))
+        y_star = self.prey_growth_rate / self.prey_death_rate
+        return (x_star, y_star)
+
+    # add function that decides which function for the fixed points to execute depending on the type of the model
+    # add same functions for computing the population dynamics
+
+def find_fixed_points(prey_change_f, predator_change_f, r=100):
+    fixed_points = []
+    fp = {}
+    for x in range(1, r):
+        for y in range(1, r):
+
+            # if prey >= 0 and predator >= 0 and prey < 1 and predator < 1:
+            #    print x, y, prey, predator
+            if (prey_change_f(float(x), float(y)) == 0.0) and (
+                predator_change_f(float(x), float(y)) < 0.4) and (
+                predator_change_f(float(x), float(y)) >= 0.0):
+                prey = prey_change_f(float(x), float(y))
+                predator = predator_change_f(float(x), float(y))
+                if y not in fp.keys():
+                    fp[y] = (x, predator)
+                else:
+                    if fp[y][1] > predator:
+                        fp[y] = (x, predator)
+                print x, y, prey, predator
+    for y in fp.keys():
+        fixed_points.append((fp[y][0], y))
+    return fixed_points
 
 def main2():
     gc = PredatorPreyModel()
@@ -323,11 +250,11 @@ def main2():
     ax2.grid()
     plt.show()
 
-def main():
 
+def main():
     population_sizes = np.arange(0.9, 1.8, 0.1)
-    alpha = 2.0/3.0
-    beta = 4.0/3.0
+    alpha = 2.0 / 3.0
+    beta = 4.0 / 3.0
     gamma = 1.0
     delta = 1.0
     fig = plt.figure(figsize=(15, 5))
@@ -348,8 +275,9 @@ def main():
         ax2.plot(prey_populations2, predator_populations2)
     plt.show()
 
+
 def main_competition():
-    gc = PredatorPreyModel(10, 10, prey_growth_rate = 0.2, predator_growth_rate = 0.5)
+    gc = PredatorPreyModel(10, 10, prey_growth_rate=0.2, predator_growth_rate=0.5)
     populations = gc.calculate_improved_euler_competition(0.02, 10000)
     print populations
     prey_populations = populations['prey']
@@ -375,8 +303,9 @@ def main_competition():
     ax2.grid()
     plt.show()
 
+
 def main_no_interaction():
-    gc = PredatorPreyModel(10, 10, prey_growth_rate = 0.2, predator_growth_rate = 0.5, predator_death_rate = 0.2)
+    gc = PredatorPreyModel(10, 10, prey_growth_rate=0.2, predator_growth_rate=0.5, predator_death_rate=0.2)
     populations = gc.calculate_improved_euler_no_interaction(0.02, 10000)
     print populations
     prey_populations = populations['prey']
@@ -404,15 +333,17 @@ def main_no_interaction():
 
 
 def main_alley():
-    gc = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
+    gc = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.1, prey_death_rate=0.005,
+                           predator_growth_rate=0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
     populations_alley = gc.calculate_improved_euler_alley(0.02, 4000)
-    gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=4.0, nu=1.0)
+    gc2 = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.1, prey_death_rate=0.005,
+                            predator_growth_rate=0.05, predator_death_rate=0.4, B=4.0, nu=1.0)
     print gc2.predator_change_alley_competition(30.0, 20.0)
     gc2.find_fixed_points_alley_competition()
     populations_alley_competition = gc2.calculate_improved_euler_alley_competition(0.02, 8000)
     print populations_alley
     prey_populations_alley = populations_alley['prey']
-    predator_populations_alley= populations_alley['predator']
+    predator_populations_alley = populations_alley['predator']
     prey_populations_alley_competition = populations_alley_competition['prey']
     predator_populations_alley_competition = populations_alley_competition['predator']
     fig = plt.figure(figsize=(15, 5))
@@ -441,21 +372,23 @@ def main_alley():
     ax1.set_title("Phase space")
     ax1.grid()
 
-    #plt.show()
+    # plt.show()
 
 
 def main_alley2():
-    gc = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
+    gc = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.1, prey_death_rate=0.005,
+                           predator_growth_rate=0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
     populations_alley = gc.calculate_improved_euler_alley(0.02, 4000)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=1.0, nu=1.0)
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=1.0, nu=1.0)
     # with 7500 gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=3.8)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=0.1)
-    gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=18.5185, nu=1.0)
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.5, prey_death_rate=0.03, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=0.1)
+    gc2 = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.5, prey_death_rate=0.03,
+                            predator_growth_rate=0.02, predator_death_rate=0.3, B=18.5185, nu=1.0)
 
     populations_alley_competition = gc2.calculate_improved_euler_alley_competition(0.02, 7500)
     print populations_alley
     prey_populations_alley = populations_alley['prey']
-    predator_populations_alley= populations_alley['predator']
+    predator_populations_alley = populations_alley['predator']
     prey_populations_alley_competition = populations_alley_competition['prey']
     predator_populations_alley_competition = populations_alley_competition['predator']
     fig = plt.figure(figsize=(15, 5))
@@ -487,18 +420,20 @@ def main_alley2():
 
 
 def main_alley3():
-    gc = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.1, prey_death_rate=0.005, predator_growth_rate = 0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
+    gc = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.1, prey_death_rate=0.005,
+                           predator_growth_rate=0.05, predator_death_rate=0.4, B=30.0, nu=1.0)
     populations_alley = gc.calculate_improved_euler_alley(0.02, 4000)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=14.0, nu=1.0)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=16.0, nu=1.0)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=3.0, nu=0.75)
-    #gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=2.0) # different
-    gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=16.0, nu=1.0) # different
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=14.0, nu=1.0)
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=16.0, nu=1.0)
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=3.0, nu=0.75)
+    # gc2 = PredatorPreyModel(prey = 50.0, predators = 20.0, prey_growth_rate = 0.03, prey_death_rate=0.002, predator_growth_rate = 0.02, predator_death_rate=0.3, B=5.0, nu=2.0) # different
+    gc2 = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.03, prey_death_rate=0.002,
+                            predator_growth_rate=0.02, predator_death_rate=0.3, B=15.0, nu=1.0)  # different
 
     populations_alley_competition = gc2.calculate_improved_euler_alley_competition(0.02, 7500)
     print populations_alley
     prey_populations_alley = populations_alley['prey']
-    predator_populations_alley= populations_alley['predator']
+    predator_populations_alley = populations_alley['predator']
     prey_populations_alley_competition = populations_alley_competition['prey']
     predator_populations_alley_competition = populations_alley_competition['predator']
     fig = plt.figure(figsize=(15, 5))
@@ -526,21 +461,68 @@ def main_alley3():
     ax1.set_ylabel("predator")
     ax1.set_title("Phase space")
     ax1.grid()
-    '''
-    X1, Y1 = np.meshgrid(prey_populations_alley_competition, predator_populations_alley_competition)  # create a grid
-    DX1, DY1 = Sys([X1, Y1])  # compute growth rate on the grid
-    M = (np.hypot(DX1, DY1))  # norm growth rate
-    M[M == 0] = 1.  # avoid zero division errors
-    DX1 /= M  # normalize each arrows
-    DY1 /= M
-    print X1
+    plt.show()
 
-    ax1.quiver(X1, Y1, DX1, DY1, M, pivot='mid')
-    '''
+def main_3():
+    gc1 = PredatorPreyModel(prey=30.0, predators=10.0, prey_growth_rate=0.03, prey_death_rate=0.002,
+                            predator_growth_rate=0.02, predator_death_rate=0.3, B=14.0, nu=1.0)  # different
+    gc2 = PredatorPreyModel(prey=45.0, predators=15.0, prey_growth_rate=0.03, prey_death_rate=0.002,
+                            predator_growth_rate=0.02, predator_death_rate=0.3, B=14.0, nu=1.0)  # different
+    gc3 = PredatorPreyModel(prey=60.0, predators=30.0, prey_growth_rate=0.03, prey_death_rate=0.002,
+                            predator_growth_rate=0.02, predator_death_rate=0.3, B=14.0, nu=1.0)  # different
+
+    populations_alley_competition_below_fp = gc1.runge_kutta(gc1.prey_change_alley_competition, gc1.predator_change_alley_competition, 0.02, 2000)
+    populations_alley_competition_fp = gc2.runge_kutta(gc2.prey_change_alley_competition, gc2.predator_change_alley_competition, 0.02, 2000)
+    populations_alley_competition_above_fp = gc3.runge_kutta(gc3.prey_change_alley_competition, gc3.predator_change_alley_competition, 0.02, 2000)
+
+    fixed_points = gc2.find_fixed_points_alley_competition_iterative()
+
+    fixed_points2 = find_fixed_points(gc2.prey_change_alley_competition, gc2.predator_change_alley_competition)
+
+    print "fp1", fixed_points
+    print "fp2", fixed_points2
+    #print gc2.predator_change_alley_competition(45.0, 15.0)
+
+    prey_populations_alley_competition_below_fp = populations_alley_competition_below_fp['prey']
+    predator_populations_alley_competition_below_fp = populations_alley_competition_below_fp['predator']
+    prey_populations_alley_competition_fp = populations_alley_competition_fp['prey']
+    predator_populations_alley_competition_fp = populations_alley_competition_fp['predator']
+    prey_populations_alley_competition_above_fp = populations_alley_competition_above_fp['prey']
+    predator_populations_alley_competition_above_fp = populations_alley_competition_above_fp['predator']
+    fig = plt.figure(figsize=(15, 5))
+    fig.subplots_adjust(wspace=0.5, hspace=0.3)
+    ax1 = fig.add_subplot(1, 2, 1)
+    ax2 = fig.add_subplot(1, 2, 2)
+
+
+    ax1.plot(predator_populations_alley_competition_below_fp, 'r-', label='predator')
+    ax1.plot(prey_populations_alley_competition_below_fp, 'r--', label='prey')
+    ax1.plot(predator_populations_alley_competition_fp, 'b-', label='predator')
+    ax1.plot(prey_populations_alley_competition_fp, 'b--', label='prey')
+    ax1.plot(predator_populations_alley_competition_above_fp, 'g-', label='predator')
+    ax1.plot(prey_populations_alley_competition_above_fp, 'g--', label='prey')
+    # ax1.plot(z, 'g-', label='prey')
+    ax1.set_title("Dynamics in time")
+    ax1.set_xlabel("time")
+    ax1.grid()
+    ax1.legend(loc='best')
+
+    ax2.plot(prey_populations_alley_competition_fp, predator_populations_alley_competition_fp, color="blue")
+    ax2.set_xlabel("prey")
+    ax2.set_ylabel("predator")
+    ax2.set_title("Phase space")
+    ax2.grid()
+    for point in fixed_points:
+        ax2.scatter(point[0], point[1], facecolors='y', edgecolors='k', s=55)
+    ax2.set_ylim(ymin=0)
+    ax2.set_xlim(xmin=0)
+    handles, labels = ax1.get_legend_handles_labels()
+    print handles, labels
+    ax1.legend(handles[:2], labels[:2])
     plt.show()
 
 if __name__ == "__main__":
-    main_alley3()
+    main_3()
 
 
 
