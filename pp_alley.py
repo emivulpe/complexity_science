@@ -292,6 +292,23 @@ class PredatorPreyModel(object):
                     print('The system has a fixed point in %s,%s' % (x, y))
         return fixed_points
 
+    def find_fixed_points_allee_competition(self):
+        t1 = self.predator_death_rate / self.predator_growth_rate
+        t2 = self.prey_growth_rate + (self.prey_death_rate * self.B)
+        t3 = t2 / self.prey_growth_rate
+        t4 = self.prey_growth_rate / (2 * self.prey_death_rate * self.nu)
+        print t1
+        print t2
+        print t3
+        print t4
+        print (t1 * t3)
+
+        x_star = (t1 * t3) + t4
+        #x_star = ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B))/self.prey_growth_rate)) + (self.prey_growth_rate / (2 * self.prey_death_rate * self.nu))
+        y_star = self.prey_growth_rate / self.prey_death_rate
+        return (x_star, y_star)
+
+
 def main2():
     gc = PredatorPreyModel()
     populations2 = gc.calculate_runge_kutta()

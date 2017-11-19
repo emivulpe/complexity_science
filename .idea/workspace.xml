@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fd51d7c-c2b0-4e0b-a9d1-93fb3938fe96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pp_competition.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pr_prey_allee_clean.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PredatorPreyModel.py" afterPath="$PROJECT_DIR$/PredatorPreyModel.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pp_alley.py" afterPath="$PROJECT_DIR$/pp_alley.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pr_prey_allee_clean.py" afterPath="$PROJECT_DIR$/pr_prey_allee_clean.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,12 +15,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="PredatorPreyModel.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PredatorPreyModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="77" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
+            <state relative-caret-position="-790">
+              <caret line="206" column="74" lean-forward="false" selection-start-line="206" selection-start-column="74" selection-end-line="206" selection-end-column="74" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -31,7 +31,7 @@
       <file leaf-file-name="predator_prey.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predator_prey.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
+            <state relative-caret-position="705">
               <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -43,7 +43,7 @@
       <file leaf-file-name="predator_prey_new.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/predator_prey_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1487">
+            <state relative-caret-position="555">
               <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -55,8 +55,8 @@
       <file leaf-file-name="pp_alley.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pp_alley.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="486" column="0" lean-forward="true" selection-start-line="486" selection-start-column="0" selection-end-line="486" selection-end-column="0" />
+            <state relative-caret-position="4635">
+              <caret line="309" column="0" lean-forward="true" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -67,21 +67,19 @@
       <file leaf-file-name="pr_prey_allee_clean.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pr_prey_allee_clean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
-              <caret line="481" column="15" lean-forward="false" selection-start-line="481" selection-start-column="15" selection-end-line="481" selection-end-column="15" />
+            <state relative-caret-position="5755">
+              <caret line="540" column="86" lean-forward="true" selection-start-line="540" selection-start-column="86" selection-end-line="540" selection-end-column="86" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-                <element signature="e#367#1303#0" expanded="false" />
-                <element signature="e#1369#1529#1" expanded="false" />
-                <element signature="e#1731#2048#0" expanded="false" />
-                <element signature="e#2108#2405#0" expanded="false" />
-                <element signature="e#2469#2844#0" expanded="false" />
-                <element signature="e#2916#3213#0" expanded="false" />
-                <element signature="e#3289#3651#0" expanded="false" />
-                <element signature="e#3718#3791#0" expanded="false" />
-                <element signature="e#3862#3944#0" expanded="false" />
-                <element signature="e#4051#4747#0" expanded="false" />
-                <element signature="e#4851#6294#0" expanded="false" />
+                <element signature="e#1435#1727#0" expanded="false" />
+                <element signature="e#1435#1595#1" expanded="false" />
+                <element signature="e#1800#2117#0" expanded="false" />
+                <element signature="e#2562#2924#0" expanded="false" />
+                <element signature="e#3054#3750#0" expanded="false" />
+                <element signature="e#3874#5317#0" expanded="false" />
+                <element signature="e#7534#7607#0" expanded="false" />
+                <element signature="e#7678#7760#0" expanded="false" />
+                <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
               </folding>
             </state>
           </provider>
@@ -90,7 +88,7 @@
       <file leaf-file-name="pp_competition.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pp_competition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="27">
+            <state relative-caret-position="990">
               <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -102,7 +100,7 @@
       <file leaf-file-name="axes.py" pinned="false" current-in-tab="false">
         <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
+            <state relative-caret-position="58350">
               <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
               <folding />
             </state>
@@ -112,7 +110,7 @@
       <file leaf-file-name="pp_alley_again.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pp_alley_again.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
+            <state relative-caret-position="6495">
               <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
@@ -135,22 +133,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/PredatorPreyModel.py" />
         <option value="$PROJECT_DIR$/predator_prey.py" />
         <option value="$PROJECT_DIR$/predator_prey_new.py" />
         <option value="$PROJECT_DIR$/pp_alley_again.py" />
         <option value="$PROJECT_DIR$/pp_competition.py" />
         <option value="$PROJECT_DIR$/pp_allee_clean.py" />
         <option value="$PROJECT_DIR$/pp_alley.py" />
+        <option value="$PROJECT_DIR$/PredatorPreyModel.py" />
         <option value="$PROJECT_DIR$/pr_prey_allee_clean.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="93" />
-    <option name="y" value="-1177" />
-    <option name="width" value="1148" />
-    <option name="height" value="977" />
+    <option name="x" value="374" />
+    <option name="y" value="24" />
+    <option name="width" value="1063" />
+    <option name="height" value="967" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -168,6 +166,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,7 +178,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -198,6 +196,23 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.pr_prey_allee_clean">
+    <configuration name="PredatorPreyModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="complexity_science" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PredatorPreyModel.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="pp_alley" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -266,37 +281,20 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <configuration name="predator_prey_new" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="complexity_science" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/predator_prey_new.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.predator_prey_new" />
-      <item index="1" class="java.lang.String" itemvalue="Python.pp_alley" />
-      <item index="2" class="java.lang.String" itemvalue="Python.pp_alley_again" />
-      <item index="3" class="java.lang.String" itemvalue="Python.pp_competition" />
-      <item index="4" class="java.lang.String" itemvalue="Python.pr_prey_allee_clean" />
+      <item index="0" class="java.lang.String" itemvalue="Python.pp_alley" />
+      <item index="1" class="java.lang.String" itemvalue="Python.pp_alley_again" />
+      <item index="2" class="java.lang.String" itemvalue="Python.pp_competition" />
+      <item index="3" class="java.lang.String" itemvalue="Python.pr_prey_allee_clean" />
+      <item index="4" class="java.lang.String" itemvalue="Python.PredatorPreyModel" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.pr_prey_allee_clean" />
-        <item index="1" class="java.lang.String" itemvalue="Python.pp_alley" />
-        <item index="2" class="java.lang.String" itemvalue="Python.pp_competition" />
-        <item index="3" class="java.lang.String" itemvalue="Python.pp_alley_again" />
-        <item index="4" class="java.lang.String" itemvalue="Python.predator_prey_new" />
+        <item index="1" class="java.lang.String" itemvalue="Python.PredatorPreyModel" />
+        <item index="2" class="java.lang.String" itemvalue="Python.pp_alley" />
+        <item index="3" class="java.lang.String" itemvalue="Python.pp_competition" />
+        <item index="4" class="java.lang.String" itemvalue="Python.pp_alley_again" />
       </list>
     </recent_temporary>
   </component>
@@ -314,26 +312,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="93" y="-1177" width="1148" height="977" extended-state="0" />
+    <frame x="374" y="24" width="1063" height="967" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3283972" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40220994" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40111732" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -369,7 +367,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/pp_alley.py</url>
-          <line>408</line>
+          <line>425</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -392,11 +390,6 @@
           <line>112</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pr_prey_allee_clean.py</url>
-          <line>170</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -406,38 +399,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+    <entry file="file://$PROJECT_DIR$/PredatorPreyModel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4205">
-          <caret line="1025" column="0" lean-forward="false" selection-start-line="1025" selection-start-column="0" selection-end-line="1025" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/predator_prey.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="705">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PredatorPreyModel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="77" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="292" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pp_alley_again.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -446,7 +421,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/predator_prey_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1487">
+        <state relative-caret-position="555">
           <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
@@ -454,36 +429,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pp_competition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pp_allee_clean.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="105" column="9" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="508" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pp_alley.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="486" column="0" lean-forward="true" selection-start-line="486" selection-start-column="0" selection-end-line="486" selection-end-column="0" />
+        <state relative-caret-position="4635">
+          <caret line="309" column="0" lean-forward="true" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -492,21 +441,142 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pr_prey_allee_clean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="481" column="15" lean-forward="false" selection-start-line="481" selection-start-column="15" selection-end-line="481" selection-end-column="15" />
+        <state relative-caret-position="4005">
+          <caret line="384" column="95" lean-forward="false" selection-start-line="384" selection-start-column="95" selection-end-line="384" selection-end-column="95" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-            <element signature="e#367#1303#0" expanded="false" />
-            <element signature="e#1369#1529#1" expanded="false" />
-            <element signature="e#1731#2048#0" expanded="false" />
-            <element signature="e#2108#2405#0" expanded="false" />
-            <element signature="e#2469#2844#0" expanded="false" />
-            <element signature="e#2916#3213#0" expanded="false" />
-            <element signature="e#3289#3651#0" expanded="false" />
-            <element signature="e#3718#3791#0" expanded="false" />
-            <element signature="e#3862#3944#0" expanded="false" />
-            <element signature="e#4051#4747#0" expanded="false" />
-            <element signature="e#4851#6294#0" expanded="false" />
+            <element signature="e#1435#1727#0" expanded="false" />
+            <element signature="e#1435#1595#1" expanded="false" />
+            <element signature="e#1800#2117#0" expanded="false" />
+            <element signature="e#2562#2924#0" expanded="false" />
+            <element signature="e#3054#3750#0" expanded="false" />
+            <element signature="e#3874#5317#0" expanded="false" />
+            <element signature="e#7534#7607#0" expanded="false" />
+            <element signature="e#7678#7760#0" expanded="false" />
+            <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_competition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58350">
+          <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_alley_again.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6495">
+          <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4205">
+          <caret line="1025" column="0" lean-forward="false" selection-start-line="1025" selection-start-column="0" selection-end-line="1025" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predator_prey.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_alley_again.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6495">
+          <caret line="433" column="0" lean-forward="false" selection-start-line="433" selection-start-column="0" selection-end-line="433" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58350">
+          <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_competition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="990">
+          <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_allee_clean.py" />
+    <entry file="file://$PROJECT_DIR$/pp_alley.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4635">
+          <caret line="309" column="0" lean-forward="true" selection-start-line="309" selection-start-column="0" selection-end-line="309" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/predator_prey_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="38" column="37" lean-forward="false" selection-start-line="38" selection-start-column="37" selection-end-line="38" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PredatorPreyModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-790">
+          <caret line="206" column="74" lean-forward="false" selection-start-line="206" selection-start-column="74" selection-end-line="206" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pr_prey_allee_clean.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5755">
+          <caret line="540" column="86" lean-forward="true" selection-start-line="540" selection-start-column="86" selection-end-line="540" selection-end-column="86" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#1435#1727#0" expanded="false" />
+            <element signature="e#1435#1595#1" expanded="false" />
+            <element signature="e#1800#2117#0" expanded="false" />
+            <element signature="e#2562#2924#0" expanded="false" />
+            <element signature="e#3054#3750#0" expanded="false" />
+            <element signature="e#3874#5317#0" expanded="false" />
+            <element signature="e#7534#7607#0" expanded="false" />
+            <element signature="e#7678#7760#0" expanded="false" />
+            <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
           </folding>
         </state>
       </provider>

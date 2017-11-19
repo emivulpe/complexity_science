@@ -3,7 +3,7 @@ import numpy as np
 
 
 class PredatorPreyModel(object):
-    def __init__(self, predators=5, prey=10, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, delta_time=0.02):
+    def __init__(self, predators=5.0, prey=10.0, prey_growth_rate=1.0, prey_death_rate=0.1, predator_death_rate=1.0, predator_growth_rate=0.075, delta_time=0.02):
         """
         Sets default values for the following instance variables:
         Lotka-Volterra equation coefficients:
@@ -150,7 +150,7 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
-    def calculate_runge_kutta(self, delta_time=0.02, iterations=1000):
+    def calculate_runge_kutta(self, delta_time=0.02, iterations=500):
         """
         Calculates the predator/prey population growth for the given parameters
         (Defined in the __init__ docstring). Returns the following dictionary:
@@ -178,25 +178,49 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
+def compute_fixed_points(prey_change_f, predator_change_f,
+                         r=100):
+    fixed_points = []
+    fp = {}
+    for x in range(1, r):
+        for y in range(1, r):
+
+            # if prey >= 0 and predator >= 0 and prey < 1 and predator < 1:
+            #    print x, y, prey, predator
+            if (prey_change_f(float(x), float(y)) == 0.0) and (
+                predator_change_f(float(x), float(y)) < 0.4) and (
+                predator_change_f(float(x), float(y)) >= 0.0):
+                prey = prey_change_f(float(x), float(y))
+                predator = predator_change_f(float(x), float(y))
+                if y not in fp.keys():
+                    fp[y] = (x, predator)
+                else:
+                    if fp[y][1] > predator:
+                        fp[y] = (x, predator)
+                print x, y, prey, predator
+    for y in fp.keys():
+        fixed_points.append((fp[y][0], y))
+    return fixed_points
+
 
 def main2():
-    gc = PredatorPreyModel()
-    populations2 = gc.calculate_runge_kutta()
+    gc = PredatorPreyModel(prey=50.0, predators=20.0, prey_growth_rate=0.25, predator_death_rate=0.75)
+    populations2 = gc.calculate_runge_kutta(iterations=1000)
     populations = gc.calculate_improved_euler()
     prey_populations = populations['prey']
     predator_populations = populations['predator']
     prey_populations2 = populations2['prey']
     predator_populations2 = populations2['predator']
-
+    print compute_fixed_points(gc.prey_change_interaction, gc.predator_change_interaction)
     fig = plt.figure(figsize=(15, 5))
     fig.subplots_adjust(wspace=0.5, hspace=0.3)
     ax1 = fig.add_subplot(1, 2, 1)
     ax2 = fig.add_subplot(1, 2, 2)
 
-    ax1.plot(predator_populations, 'r-', label='predator')
-    ax1.plot(prey_populations, 'b-', label='prey')
-    ax1.plot(predator_populations2, 'y-', label='predator_rk')
-    ax1.plot(prey_populations2, 'g-', label='prey_rk')
+    #ax1.plot(predator_populations, 'r-', label='predator')
+    #ax1.plot(prey_populations, 'b-', label='prey')
+    ax1.plot(predator_populations2, 'y-', label='predator')
+    ax1.plot(prey_populations2, 'g-', label='prey')
     # ax1.plot(z, 'g-', label='prey')
     ax1.set_title("Dynamics in time")
     ax1.set_xlabel("time")
@@ -289,4 +313,4 @@ def main_no_interaction():
     ax2.grid()
     plt.show()
 if __name__ == "__main__":
-    main()
+    main2()
