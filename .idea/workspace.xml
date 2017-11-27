@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6fd51d7c-c2b0-4e0b-a9d1-93fb3938fe96" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pp_final.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PredatorPreyModel.py" afterPath="$PROJECT_DIR$/PredatorPreyModel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pp_alley.py" afterPath="$PROJECT_DIR$/pp_alley.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pr_prey_allee_clean.py" afterPath="$PROJECT_DIR$/pr_prey_allee_clean.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -64,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pr_prey_allee_clean.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pr_prey_allee_clean.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pr_prey_allee_clean.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5755">
-              <caret line="540" column="86" lean-forward="true" selection-start-line="540" selection-start-column="86" selection-end-line="540" selection-end-column="86" />
+            <state relative-caret-position="244">
+              <caret line="606" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
                 <element signature="e#1435#1727#0" expanded="false" />
@@ -79,8 +78,18 @@
                 <element signature="e#3874#5317#0" expanded="false" />
                 <element signature="e#7534#7607#0" expanded="false" />
                 <element signature="e#7678#7760#0" expanded="false" />
-                <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
+                <marker date="1511727775000" expanded="true" signature="5815:6669" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pp_final.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pp_final.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="110" column="40" lean-forward="false" selection-start-line="110" selection-start-column="40" selection-end-line="110" selection-end-column="40" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -88,21 +97,11 @@
       <file leaf-file-name="pp_competition.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pp_competition.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
+            <state relative-caret-position="-3">
+              <caret line="65" column="75" lean-forward="true" selection-start-line="65" selection-start-column="75" selection-end-line="65" selection-end-column="75" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="axes.py" pinned="false" current-in-tab="false">
-        <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58350">
-              <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -141,13 +140,14 @@
         <option value="$PROJECT_DIR$/pp_alley.py" />
         <option value="$PROJECT_DIR$/PredatorPreyModel.py" />
         <option value="$PROJECT_DIR$/pr_prey_allee_clean.py" />
+        <option value="$PROJECT_DIR$/pp_final.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="374" />
-    <option name="y" value="24" />
-    <option name="width" value="1063" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="280" />
+    <option name="y" value="23" />
+    <option name="width" value="1400" />
     <option name="height" value="967" />
   </component>
   <component name="ProjectView">
@@ -195,7 +195,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pr_prey_allee_clean">
+  <component name="RunManager" selected="Python.pp_final">
     <configuration name="PredatorPreyModel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -264,6 +264,23 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="pp_final" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/System/Library/Frameworks/Python.framework/Versions/2.6/bin/python2.6" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="complexity_science" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pp_final.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <configuration name="pr_prey_allee_clean" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -281,12 +298,13 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
-    <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.pp_alley" />
-      <item index="1" class="java.lang.String" itemvalue="Python.pp_alley_again" />
-      <item index="2" class="java.lang.String" itemvalue="Python.pp_competition" />
-      <item index="3" class="java.lang.String" itemvalue="Python.pr_prey_allee_clean" />
-      <item index="4" class="java.lang.String" itemvalue="Python.PredatorPreyModel" />
+    <list size="6">
+      <item index="0" class="java.lang.String" itemvalue="Python.pp_final" />
+      <item index="1" class="java.lang.String" itemvalue="Python.pp_alley" />
+      <item index="2" class="java.lang.String" itemvalue="Python.pp_alley_again" />
+      <item index="3" class="java.lang.String" itemvalue="Python.pp_competition" />
+      <item index="4" class="java.lang.String" itemvalue="Python.pr_prey_allee_clean" />
+      <item index="5" class="java.lang.String" itemvalue="Python.PredatorPreyModel" />
     </list>
     <recent_temporary>
       <list size="5">
@@ -312,18 +330,18 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="374" y="24" width="1063" height="967" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="972" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35465664" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22440477" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40111732" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3988889" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39889503" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3988827" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -394,7 +412,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="10" />
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -453,7 +471,7 @@
             <element signature="e#3874#5317#0" expanded="false" />
             <element signature="e#7534#7607#0" expanded="false" />
             <element signature="e#7678#7760#0" expanded="false" />
-            <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
+            <marker date="1511727775000" expanded="true" signature="5815:6669" ph="..." />
           </folding>
         </state>
       </provider>
@@ -513,24 +531,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58350">
-          <caret line="3898" column="0" lean-forward="false" selection-start-line="3898" selection-start-column="0" selection-end-line="3898" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pp_competition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="67" column="11" lean-forward="false" selection-start-line="67" selection-start-column="11" selection-end-line="67" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pp_allee_clean.py" />
     <entry file="file://$PROJECT_DIR$/pp_alley.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -562,10 +562,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.6/Extras/lib/python/matplotlib/axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="3887" column="44" lean-forward="true" selection-start-line="3887" selection-start-column="44" selection-end-line="3887" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_competition.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3">
+          <caret line="65" column="75" lean-forward="true" selection-start-line="65" selection-start-column="75" selection-end-line="65" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pr_prey_allee_clean.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5755">
-          <caret line="540" column="86" lean-forward="true" selection-start-line="540" selection-start-column="86" selection-end-line="540" selection-end-column="86" />
+        <state relative-caret-position="244">
+          <caret line="606" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="653" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#1435#1727#0" expanded="false" />
@@ -576,8 +594,16 @@
             <element signature="e#3874#5317#0" expanded="false" />
             <element signature="e#7534#7607#0" expanded="false" />
             <element signature="e#7678#7760#0" expanded="false" />
-            <marker date="1511122899000" expanded="true" signature="5815:6669" ph="..." />
+            <marker date="1511727775000" expanded="true" signature="5815:6669" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pp_final.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="110" column="40" lean-forward="false" selection-start-line="110" selection-start-column="40" selection-end-line="110" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
