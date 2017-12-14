@@ -1,6 +1,7 @@
 import argparse
 import matplotlib.pyplot as plt
 
+
 def setup_parser():
 
     """
@@ -35,6 +36,7 @@ class PredatorPreyModel(object):
                  eta=0.1, B=4):
         """
         A initializing method for the predator-prey model.
+
         :param predators: the initial number of predators
         :param prey: the initial number of prey
         :param prey_growth_rate: the prey growth rate (r1)
@@ -55,22 +57,24 @@ class PredatorPreyModel(object):
         self.eta = float(eta)
 
     def prey_change(self, prey, predators):
-
         """
-        Calculates the change in prey population
+        Calculates the change in prey population.
+
         :param prey: the number of prey
         :param predators: the number of predators
+
         :return: the change in prey population
         """
 
         return prey * self.prey_growth_rate - self.prey_death_rate * predators * prey
 
     def predator_change(self, prey, predators):
-
         """
-        Calculates the change in predator population with terms for intraspecific competition and Allee effect
+        Calculates the change in predator population with terms for intraspecific competition and Allee effect.
+
         :param prey: the number of prey
         :param predators: the number of predators
+
         :return: the change in predator population
         """
 
@@ -80,9 +84,11 @@ class PredatorPreyModel(object):
     def improved_euler(self,
                        time_step=0.02, time_interval=100):
         """
-        Euler method for the change functions of the predator and prey population.
+        Improved Euler method for the change functions of the predator and prey population.
+
         :param time_step: the time step for the Euler method
         :param time_interval: the time interval for the Euler method
+
         :return: A dictionary containing the prey and the predator population history, calculated with the Euler method
         for the specified time step and time interval.
         """
@@ -104,13 +110,13 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
-
     def runge_kutta(self, delta_time=0.02, iterations=100):
-
         """
         Runge-Kutta method for the change functions of the predator and prey population.
+
         :param time_step: the time step for the Euler method
         :param time_interval: the time interval for the Euler method
+
         :return: A dictionary containing the prey and the predator population history, calculated with the Runge-Kutta method
         for the specified time step and time interval.
         """
@@ -137,15 +143,36 @@ class PredatorPreyModel(object):
         return {'predator': predator_history, 'prey': prey_history}
 
     def compute_predator_fp(self):
+        """
+        A method to compute the predator portion of the fixed point (P*)..
+        :return: the predator portion of the fixed point
+        """
+
         return (self.prey_growth_rate / (self.prey_death_rate * self.eta)) + ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B)) / self.prey_growth_rate))
 
     def compute_prey_fp(self):
+        """
+        A method to compute the prey portion of the fixed point (N*).
+        :return: the prey portion of the fixed point
+        """
+
         return self.prey_growth_rate / self.prey_death_rate
 
     def compute_fixed_point(self):
+        """
+        A method to compute the fixed point for the model.
+        :return: the fixed point (P*, N*)
+        """
+
         return (self.compute_predator_fp(), self.compute_prey_fp())
 
     def compute_trace(self):
+        """
+        A method to compute the trace of the Jacobian matrix of the model.
+
+        :return: the trace of the Jacobian matrix
+        """
+
         t1 = self.B * self.predator_death_rate*self.prey_death_rate**2*self.eta
         t2 = self.prey_growth_rate**2 * self.predator_growth_rate
         t3 = self.prey_growth_rate * self.prey_death_rate * self.eta
@@ -153,6 +180,12 @@ class PredatorPreyModel(object):
         return (t1 - t2) / (t3 + t4)
 
     def compute_determinant(self):
+        """
+        A method to compute the determinant of the Jacobian matrix of the model.
+
+        :return: the determinant of the Jacobian matrix
+        """
+
         t1 = self.prey_growth_rate**2 * self.predator_death_rate * self.prey_death_rate * self.eta
         t2 = self.B * self.prey_growth_rate * self.predator_death_rate * self.prey_death_rate**2 * self.eta
         t3 = self.prey_growth_rate**3 * self.predator_growth_rate
@@ -161,6 +194,12 @@ class PredatorPreyModel(object):
         return (t1 + t2 + t3) / (t4 + t5)
 
     def fixed_point_type(self):
+        """
+        A method to determine the type of the fixed point based on the determinant and the trace of the Jacobian matrix of the model.
+
+        :return: the type of the fixed point: stable, center or unstable
+        """
+
         determinant = self.compute_determinant()
         if determinant < 0:
             return "saddle"
@@ -174,7 +213,17 @@ class PredatorPreyModel(object):
                 return "unstable"
             else:
                 return "centre"
+
+
 def draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, fixed_point, fixed_point_type):
+    """
+    A method to draw the plots for the dynamics of predator and prey populations.
+
+    :param prey_population_dynamics: the history of the prey population change
+    :param predator_population_dynamics: the history of the predator population change
+    :param fixed_point: the fixed point
+    :param fixed_point_type: the type of the fixed point
+    """
 
     fig = plt.figure(figsize=(15, 5))
     fig.subplots_adjust(wspace=0.5, hspace=0.3)
@@ -200,7 +249,18 @@ def draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, 
 
     plt.show()
 
+
 def setup_fixed_point(fixed_point_type):
+    """
+    A method to set up how the fixed point looks in a plot.
+
+    :param fixed_point_type: the type of the fixed point
+    :return: the fill color of the point on the graph and the edgecolor of the point
+    Unstable point has red border and no fill color.
+    Center points are filled yellow.
+    Stable points are filled red.
+    """
+
     facecolors = 'g'
     edgecolors = 'g'
     if fixed_point_type is 'stable':
@@ -216,14 +276,19 @@ def setup_fixed_point(fixed_point_type):
     return facecolors, edgecolors
 
 
-
-
 def main():
+    """
+    The entry point for the module.
+    """
+
+    # Setup the command line argument parser
     args = setup_parser()
 
+    # Setup the model
     model = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
                            predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
 
+    # Determine which method to use for the differential equations
     if args.method is "rc":
         populations_alley_competition = model.runge_kutta(args.time_step, args.time_interval)
         print ("Using Runge-Kutta method for the differential equations with time step {} for time interval [0, {}]!".format(args.time_step, args.time_interval))
@@ -231,12 +296,16 @@ def main():
         print ("Using Improved Euler method for the differential equations with time step {} for time interval [0, {}]!".format(args.time_step, args.time_interval))
         populations_alley_competition = model.improved_euler(args.time_step, args.time_interval)
 
-    prey_population_dynamics = populations_alley_competition['prey']
-    predator_population_dynamics = populations_alley_competition['predator']
+    # Compute the fixed point and determine its type
     fixed_point = model.compute_fixed_point()
     fixed_point_type = model.fixed_point_type()
-    print ("The fixed point is ({:.2f}, {:.2f}) and it is {}.".format(fixed_point[0], fixed_point[1], fixed_point_type))
+    print("The fixed point is ({:.2f}, {:.2f}) and it is {}.".format(fixed_point[0], fixed_point[1], fixed_point_type))
+
+    # Plot the results
+    prey_population_dynamics = populations_alley_competition['prey']
+    predator_population_dynamics = populations_alley_competition['predator']
     draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, fixed_point, fixed_point_type)
+
 
 if __name__ == "__main__":
     main()

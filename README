@@ -41,4 +41,3 @@ optional arguments:
   -m {rc,ie}            the method to calculate the differential equations for
                         the predator and the prey population change
 
-                        
