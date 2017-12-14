@@ -2,17 +2,17 @@ import argparse
 import matplotlib.pyplot as plt
 
 def setup_parser():
-    parser = argparse.ArgumentParser(description="Setup a simulation for predator-prey population dynamics with Allee effect and Intraspecific competition")
-    parser.add_argument("-N", "--prey", type=int, default=25)
-    parser.add_argument("-P", "--predators", type=int, default=20)
-    parser.add_argument("-r1", "--prey_growth_rate", type=float, default=0.1)
-    parser.add_argument("-delta", "--prey_death_rate", type=float, default=0.005)
-    parser.add_argument("-theta", "--predator_growth_rate", type=float, default=0.05)
-    parser.add_argument("-r2", "--predator_death_rate", type=float, default=0.4)
-    parser.add_argument("-B", "--allee_constant", type=float, default=25.0)
-    parser.add_argument("-eta", "--proportionality_constant", type=float, default=2.006)
-    parser.add_argument("-ts", "--time_step", type=float, default=0.1)
-    parser.add_argument("-ti", "--time_interval", type=int, default=19500)
+    parser = argparse.ArgumentParser(description="Simulation for predator-prey population dynamics with Allee effect and intraspecific competition.")
+    parser.add_argument("-N", dest="prey", type=int, default=25, help="the initial number of prey")
+    parser.add_argument("-P", dest="predators", type=int, default=20, help="the initial number of predators")
+    parser.add_argument("-r1", dest="prey_growth_rate", type=float, default=0.1, help="the prey growth rate")
+    parser.add_argument("-delta", dest="prey_death_rate", type=float, default=0.005, help="the prey death rate")
+    parser.add_argument("-theta", dest="predator_growth_rate", type=float, default=0.05, help="the predator growth rate")
+    parser.add_argument("-r2", dest="predator_death_rate", type=float, default=0.4, help="the predator death rate")
+    parser.add_argument("-B", dest="allee_constant", type=float, default=25.0, help="the Allee constant")
+    parser.add_argument("-eta", dest="proportionality_constant", type=float, default=2.006, help="the proportionality constant")
+    parser.add_argument("-ts", dest="time_step", type=float, default=0.1, help="the time step for the Runge-Kutta method")
+    parser.add_argument("-ti", dest="time_interval", type=int, default=19500, help="the time interval for the Runge-Kutta method")
 
     return parser.parse_args()
 
@@ -163,7 +163,7 @@ def draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, 
     ax2.grid()
 
     facecolors, edgecolors = setup_fixed_point(fixed_point_type)
-    
+
     ax2.scatter(fixed_point[0], fixed_point[1], facecolors=facecolors, edgecolors=edgecolors, s=55)
 
     plt.show()

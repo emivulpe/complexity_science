@@ -1,0 +1,40 @@
+Script description
+------------------
+This is a Python script which performs a simulation of the population dynamics of a predator-prey model with Allee effect and
+intraspecific competition in the predator population.
+The model was proposed in a paper from Bodine and Yurst (Reference)
+The paper can be found here: http://www.tandfonline.com/doi/full/10.1080/23737867.2017.1282843?scroll=top&needAccess=true
+
+
+*******************************************************************************************************************************
+
+
+Requirements
+------------
+The script runs with Python v3.6.
+
+
+*******************************************************************************************************************************
+
+
+Running command
+---------------
+
+python predator_prey.py
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -N PREY               the initial number of prey
+  -P PREDATORS          the initial number of predators
+  -r1 PREY_GROWTH_RATE  the prey growth rate
+  -delta PREY_DEATH_RATE
+                        the prey death rate
+  -theta PREDATOR_GROWTH_RATE
+                        the predator growth rate
+  -r2 PREDATOR_DEATH_RATE
+                        the predator death rate
+  -B ALLEE_CONSTANT     the Allee constant
+  -eta PROPORTIONALITY_CONSTANT
+                        the proportionality constant
+  -ts TIME_STEP         the time step for the Runge-Kutta method
+  -ti TIME_INTERVAL     the time interval for the Runge-Kutta method
