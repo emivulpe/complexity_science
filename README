@@ -41,3 +41,4 @@ optional arguments:
   -m {rc,ie}            the method to calculate the differential equations for
                         the predator and the prey population change
 
+Example to change the number of prey to 25, predators to 20 and the differential equation method to Improved Euler: python pp_allee_and_competition.py -N 25 -P 20 -m ie

@@ -10,18 +10,19 @@ def setup_parser():
     """
 
     parser = argparse.ArgumentParser(description="Simulation for predator-prey population dynamics with Allee effect and intraspecific competition.")
-    parser.add_argument("-N", dest="prey", type=int, default=25, help="the initial number of prey")
-    parser.add_argument("-P", dest="predators", type=int, default=20, help="the initial number of predators")
-    parser.add_argument("-r1", dest="prey_growth_rate", type=float, default=0.1, help="the prey growth rate")
-    parser.add_argument("-delta", dest="prey_death_rate", type=float, default=0.005, help="the prey death rate")
-    parser.add_argument("-theta", dest="predator_growth_rate", type=float, default=0.05, help="the predator growth rate")
-    parser.add_argument("-r2", dest="predator_death_rate", type=float, default=0.4, help="the predator death rate")
-    parser.add_argument("-B", dest="allee_constant", type=float, default=25.0, help="the Allee constant")
-    parser.add_argument("-eta", dest="proportionality_constant", type=float, default=2.006, help="the proportionality constant")
-    parser.add_argument("-ts", dest="time_step", type=float, default=0.1, help="the time step for the Runge-Kutta method")
-    parser.add_argument("-ti", dest="time_interval", type=int, default=19500, help="the time interval for the Runge-Kutta method")
+    parser.add_argument("-N", dest="prey", type=int, default=25, help="the initial number of prey (default 25)")
+    parser.add_argument("-P", dest="predators", type=int, default=20, help="the initial number of predators (default 20)")
+    parser.add_argument("-r1", dest="prey_growth_rate", type=float, default=0.1, help="the prey growth rate (default 0.1)")
+    parser.add_argument("-delta", dest="prey_death_rate", type=float, default=0.005, help="the prey death rate (default 0.005)")
+    parser.add_argument("-theta", dest="predator_growth_rate", type=float, default=0.05, help="the predator growth rate (default 0.05)")
+    parser.add_argument("-r2", dest="predator_death_rate", type=float, default=0.4, help="the predator death rate (default 0.4)")
+    parser.add_argument("-B", dest="allee_constant", type=float, default=25.0, help="the Allee constant (default 25)")
+    parser.add_argument("-eta", dest="proportionality_constant", type=float, default=2.006, help="the proportionality constant (default 2.006)")
+    parser.add_argument("-ts", dest="time_step", type=float, default=0.1, help="the time step for the Runge-Kutta method (default 0.1)")
+    parser.add_argument("-ti", dest="time_interval", type=int, default=19500, help="the time interval for the Runge-Kutta method (default 19500)")
     parser.add_argument("-m", dest="method", type=str, default="rc",
-                        help="the method to calculate the differential equations for the predator and the prey population change", choices=["rc", "ie"])
+                        help="the method to calculate the differential equations for the predator and the prey population change. Choose rc for Ronge-Kutta or ie for Improved Euler (default rc)",
+                        choices=["rc", "ie"])
 
     return parser.parse_args()
 
@@ -285,12 +286,33 @@ def main():
     # Setup the command line argument parser
     args = setup_parser()
 
-    # Setup the model
-    model = PredatorPreyModel(prey=args.prey, predators=args.predators,
-                              prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
-                              predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate,
-                              B=args.allee_constant, eta=args.proportionality_constant)
+    prey = args.prey
+    predators = args.predators
+    prey_growth_rate = args.prey_growth_rate
+    prey_death_rate = args.prey_death_rate
+    predator_growth_rate = args.predator_growth_rate
+    predator_death_rate = args.predator_death_rate
+    B = args.allee_constant
+    eta = args.proportionality_constant
 
+    # Setup the model
+    model = PredatorPreyModel(prey=prey, predators=predators,
+                              prey_growth_rate=prey_growth_rate, prey_death_rate=prey_death_rate,
+                              predator_growth_rate=predator_growth_rate, predator_death_rate=predator_death_rate,
+                              B=B, eta=eta)
+
+    print ("----------------------------")
+    print ("Created the following model:")
+    print ("----------------------------")
+    print ("Initial number of prey: {}".format(prey))
+    print ("Initial number of predators: {}".format(predators))
+    print ("Prey growth rade: {}".format(prey_growth_rate))
+    print ("Prey death rate: {}".format(prey_death_rate))
+    print ("Predator growth rate: {}".format(predator_growth_rate))
+    print ("Predator death rate: {}".format(predator_death_rate))
+    print ("Allee effect constant: {}".format(B))
+    print ("Proportionality constant: {}".format(eta))
+    print ("")
     # Determine which method to use for the differential equations
     if args.method is "rc":
         populations_alley_competition = model.runge_kutta(args.time_step, args.time_interval)
@@ -302,6 +324,7 @@ def main():
     # Compute the fixed point and determine its type
     fixed_point = model.compute_fixed_point()
     fixed_point_type = model.fixed_point_type()
+    print ("")
     print("The fixed point is ({:.2f}, {:.2f}) and it is {}.".format(fixed_point[0], fixed_point[1], fixed_point_type))
 
     # Plot the results
