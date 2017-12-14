@@ -1,4 +1,21 @@
+import argparse
 import matplotlib.pyplot as plt
+
+def setup_parser():
+    parser = argparse.ArgumentParser(description="Setup a simulation for predator-prey population dynamics with Allee effect and Intraspecific competition")
+    parser.add_argument("-N", "--prey", type=int, default=25)
+    parser.add_argument("-P", "--predators", type=int, default=20)
+    parser.add_argument("-r1", "--prey_growth_rate", type=float, default=0.1)
+    parser.add_argument("-delta", "--prey_death_rate", type=float, default=0.005)
+    parser.add_argument("-theta", "--predator_growth_rate", type=float, default=0.05)
+    parser.add_argument("-r2", "--predator_death_rate", type=float, default=0.4)
+    parser.add_argument("-B", "--allee_constant", type=float, default=25.0)
+    parser.add_argument("-eta", "--proportionality_constant", type=float, default=2.006)
+    parser.add_argument("-ts", "--time_step", type=float, default=0.1)
+    parser.add_argument("-ti", "--time_interval", type=int, default=19500)
+
+    return parser.parse_args()
+
 
 class PredatorPreyModel(object):
 
@@ -19,14 +36,14 @@ class PredatorPreyModel(object):
             self.eta - predator vs prey proportionality constant
         """
 
-        self.predators = predators
-        self.prey = prey
-        self.prey_growth_rate = prey_growth_rate
-        self.prey_death_rate = prey_death_rate
-        self.predator_death_rate = predator_death_rate
-        self.predator_growth_rate = predator_growth_rate
-        self.B = B
-        self.eta = eta
+        self.predators = float(predators)
+        self.prey = float(prey)
+        self.prey_growth_rate = float(prey_growth_rate)
+        self.prey_death_rate = float(prey_death_rate)
+        self.predator_death_rate = float(predator_death_rate)
+        self.predator_growth_rate = float(predator_growth_rate)
+        self.B = float(B)
+        self.eta = float(eta)
 
     def prey_change_alley_competition(self, prey, predators):
         """
@@ -87,12 +104,55 @@ class PredatorPreyModel(object):
 
         return {'predator': predator_history, 'prey': prey_history}
 
+    def compute_predator_fp(self):
+        return (self.prey_growth_rate / (self.prey_death_rate * self.eta)) + ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B)) / self.prey_growth_rate))
+
+    def compute_prey_fp(self):
+        return self.prey_growth_rate / self.prey_death_rate
+
+    def compute_fixed_points(self):
+        return (self.compute_predator_fp(), self.compute_prey_fp())
+
+    def compute_trace(self):
+        t1 = self.B * self.predator_death_rate*self.prey_death_rate**2*self.eta
+        t2 = self.prey_growth_rate**2 * self.predator_growth_rate
+        t3 = self.prey_growth_rate * self.prey_death_rate * self.eta
+        t4 = self.B * self.prey_death_rate**2 * self.eta
+        return (t1 - t2) / (t3 + t4)
+
+    def compute_determinant(self):
+        t1 = self.prey_growth_rate**2 * self.predator_death_rate * self.prey_death_rate * self.eta
+        t2 = self.B * self.prey_growth_rate * self.predator_death_rate * self.prey_death_rate**2 * self.eta
+        t3 = self.prey_growth_rate**3 * self.predator_growth_rate
+        t4 = self.prey_growth_rate * self.prey_death_rate * self.eta
+        t5 = self.B * self.prey_death_rate**2 * self.eta
+        return (t1 + t2 + t3) / (t4 + t5)
+
+    def fixed_point_type(self):
+        determinant = self.compute_determinant()
+        if determinant < 0:
+            return "saddle"
+        elif determinant == 0:
+            return "centre"
+        else:
+            trace = self.compute_trace()
+            print (trace)
+            if trace < -10**-10:
+                return "stable"
+            elif trace > 10**-10:
+                return "unstable"
+            else:
+                return "centre"
+
 
 def main():
-    gc = PredatorPreyModel(prey=25.0, predators=20.0, prey_growth_rate=0.1, prey_death_rate=0.005,
-                           predator_growth_rate=0.05, predator_death_rate=0.4, B=25.5, eta=2.05)
+    args = setup_parser()
 
-    populations_alley_competition = gc.runge_kutta(gc.prey_change_alley_competition, gc.predator_change_alley_competition, 0.03, 15000)
+    gc = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
+                           predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
+
+
+    populations_alley_competition = gc.runge_kutta(gc.prey_change_alley_competition, gc.predator_change_alley_competition, args.time_step, args.time_interval)
 
     prey_populations_alley_competition = populations_alley_competition['prey']
     predator_populations_alley_competition = populations_alley_competition['predator']
@@ -113,8 +173,26 @@ def main():
     ax2.set_ylabel("predator")
     ax2.set_title("Phase space")
     ax2.grid()
+    fixed_point = gc.compute_fixed_points()
+    fixed_point_type = gc.fixed_point_type()
+    facecolors='g'
+    edgecolors='g'
+    if fixed_point_type is 'stable':
+        facecolors = 'r'
+        edgecolors = 'r'
+    elif fixed_point_type is 'unstable':
+        facecolors = 'none'
+        edgecolors = 'r'
+    elif fixed_point_type is 'center':
+        facecolors = 'y'
+        edgecolors = 'y'
+
+    ax2.scatter(fixed_point[0], fixed_point[1], facecolors=facecolors, edgecolors=edgecolors, s=55)
+    print (gc.fixed_point_type())
+    print (fixed_point)
 
     plt.show()
+
 
 
 if __name__ == "__main__":
@@ -123,5 +201,7 @@ if __name__ == "__main__":
 
 
 
-# add function that decides which function for the fixed points to execute depending on the type of the model
-# add same functions for computing the population dynamics
+
+# TODO Add code to determine if a fixed point is stable
+# TODO Add cli
+# Fix center dynamics
