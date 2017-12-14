@@ -38,3 +38,7 @@ optional arguments:
                         the proportionality constant
   -ts TIME_STEP         the time step for the Runge-Kutta method
   -ti TIME_INTERVAL     the time interval for the Runge-Kutta method
+  -m {rc,ie}            the method to calculate the differential equations for
+                        the predator and the prey population change
+
+                        

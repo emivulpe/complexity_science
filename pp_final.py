@@ -2,6 +2,13 @@ import argparse
 import matplotlib.pyplot as plt
 
 def setup_parser():
+
+    """
+    A function to setup a command-line arguments parser.
+
+    :return: the parsed command line arguments
+    """
+
     parser = argparse.ArgumentParser(description="Simulation for predator-prey population dynamics with Allee effect and intraspecific competition.")
     parser.add_argument("-N", dest="prey", type=int, default=25, help="the initial number of prey")
     parser.add_argument("-P", dest="predators", type=int, default=20, help="the initial number of predators")
@@ -13,27 +20,29 @@ def setup_parser():
     parser.add_argument("-eta", dest="proportionality_constant", type=float, default=2.006, help="the proportionality constant")
     parser.add_argument("-ts", dest="time_step", type=float, default=0.1, help="the time step for the Runge-Kutta method")
     parser.add_argument("-ti", dest="time_interval", type=int, default=19500, help="the time interval for the Runge-Kutta method")
+    parser.add_argument("-m", dest="method", type=str, default="rc", help="the method to calculate the differential equations for the predator and the prey population change", choices=["rc", "ie"])
 
     return parser.parse_args()
 
 
 class PredatorPreyModel(object):
+    """A class for the predator-prey model with Alee effect and intraspecific competition in the predator population"""
+
 
     def __init__(self, predators=5, prey=10,
                  prey_growth_rate=1.0, prey_death_rate=0.1,
                  predator_death_rate=1.0, predator_growth_rate=0.075,
                  eta=0.1, B=4):
         """
-        Sets default values for the following instance variables:
-        Lotka-Volterra equation coefficients:
-            self.predators - Predator population at time 0
-            self.prey - Prey population at time 0
-            self.prey_growth_rate - Prey growth rate in the absence of predators
-            self.prey_death_rate - Prey death rate due to predations
-            self.predator_growth_rate - Predator growth rate per eaten prey
-            self.predator_death_rate - Predator decay rate due to absence of prey
-            self.B - Allee effect constant
-            self.eta - predator vs prey proportionality constant
+        A initializing method for the predator-prey model.
+        :param predators: the initial number of predators
+        :param prey: the initial number of prey
+        :param prey_growth_rate: the prey growth rate (r1)
+        :param prey_death_rate: the prey death rate (delta)
+        :param predator_death_rate: the predator death rate (r2)
+        :param predator_growth_rate: the predator growth rate (theta)
+        :param eta: the proportionality constant
+        :param B: the Allee effect constant
         """
 
         self.predators = float(predators)
@@ -45,31 +54,47 @@ class PredatorPreyModel(object):
         self.B = float(B)
         self.eta = float(eta)
 
-    def prey_change_alley_competition(self, prey, predators):
+    def prey_change(self, prey, predators):
+
         """
-        Calculates the change in prey population size
+        Calculates the change in prey population
+        :param prey: the number of prey
+        :param predators: the number of predators
+        :return: the change in prey population
         """
 
         return prey * self.prey_growth_rate - self.prey_death_rate * predators * prey
 
-    def predator_change_alley_competition(self, prey, predators):
+    def predator_change(self, prey, predators):
+
         """
         Calculates the change in predator population with terms for intraspecific competition and Allee effect
+        :param prey: the number of prey
+        :param predators: the number of predators
+        :return: the change in predator population
         """
 
         return (predators * self.predator_growth_rate * prey * (
         predators / (predators + self.B) * (1 - predators / (self.eta * prey)))) - self.predator_death_rate * predators
 
-    def improved_euler(self, prey_change_f, predator_change_f,
-                       delta_time=0.02, iterations=100):
+    def improved_euler(self,
+                       time_step=0.02, time_interval=100):
+        """
+        Euler method for the change functions of the predator and prey population.
+        :param time_step: the time step for the Euler method
+        :param time_interval: the time interval for the Euler method
+        :return: A dictionary containing the prey and the predator population history, calculated with the Euler method
+        for the specified time step and time interval.
+        """
+
         predator_history = []
         prey_history = []
 
-        for i in range(iterations):
-            xk_1 = prey_change_f(self.prey, self.predators) * delta_time
-            yk_1 = predator_change_f(self.prey, self.predators) * delta_time
-            xk_2 = prey_change_f(self.prey + xk_1, self.predators + yk_1) * delta_time
-            yk_2 = predator_change_f(self.prey + xk_1, self.predators + yk_1) * delta_time
+        for i in range(time_interval):
+            xk_1 = self.prey_change(self.prey, self.predators) * time_step
+            yk_1 = self.predator_change(self.prey, self.predators) * time_step
+            xk_2 = self.prey_change(self.prey + xk_1, self.predators + yk_1) * time_step
+            yk_2 = self.predator_change(self.prey + xk_1, self.predators + yk_1) * time_step
 
             self.prey = self.prey + (xk_1 + xk_2) / 2
             self.predators = self.predators + (yk_1 + yk_2) / 2
@@ -80,21 +105,28 @@ class PredatorPreyModel(object):
         return {'predator': predator_history, 'prey': prey_history}
 
 
-    def runge_kutta(self, prey_change_f, predator_change_f,
-                    delta_time=0.02, iterations=100):
+    def runge_kutta(self, delta_time=0.02, iterations=100):
+
+        """
+        Runge-Kutta method for the change functions of the predator and prey population.
+        :param time_step: the time step for the Euler method
+        :param time_interval: the time interval for the Euler method
+        :return: A dictionary containing the prey and the predator population history, calculated with the Runge-Kutta method
+        for the specified time step and time interval.
+        """
 
         predator_history = []
         prey_history = []
 
         for i in range(iterations):
-            xk_1 = prey_change_f(self.prey, self.predators) * delta_time
-            yk_1 = predator_change_f(self.prey, self.predators) * delta_time
-            xk_2 = prey_change_f(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
-            yk_2 = predator_change_f(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
-            xk_3 = prey_change_f(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
-            yk_3 = predator_change_f(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
-            xk_4 = prey_change_f(self.prey + xk_3, self.predators + yk_3) * delta_time
-            yk_4 = predator_change_f(self.prey + xk_3, self.predators + yk_3) * delta_time
+            xk_1 = self.prey_change(self.prey, self.predators) * delta_time
+            yk_1 = self.predator_change(self.prey, self.predators) * delta_time
+            xk_2 = self.prey_change(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
+            yk_2 = self.predator_change(self.prey + 0.5 * xk_1, self.predators + 0.5 * yk_1) * delta_time
+            xk_3 = self.prey_change(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
+            yk_3 = self.predator_change(self.prey + 0.5 * xk_2, self.predators + 0.5 * yk_2) * delta_time
+            xk_4 = self.prey_change(self.prey + xk_3, self.predators + yk_3) * delta_time
+            yk_4 = self.predator_change(self.prey + xk_3, self.predators + yk_3) * delta_time
 
             self.prey = self.prey + (xk_1 + 2 * xk_2 + 2 * xk_3 + xk_4) / 6
             self.predators = self.predators + (yk_1 + 2 * yk_2 + 2 * yk_3 + yk_4) / 6
@@ -192,8 +224,12 @@ def main():
     model = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
                            predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
 
-
-    populations_alley_competition = model.runge_kutta(model.prey_change_alley_competition, model.predator_change_alley_competition, args.time_step, args.time_interval)
+    if args.method is "rc":
+        populations_alley_competition = model.runge_kutta(args.time_step, args.time_interval)
+        print ("Using Runge-Kutta method for the differential equations with time step {} for time interval [0, {}]!".format(args.time_step, args.time_interval))
+    else:
+        print ("Using Improved Euler method for the differential equations with time step {} for time interval [0, {}]!".format(args.time_step, args.time_interval))
+        populations_alley_competition = model.improved_euler(args.time_step, args.time_interval)
 
     prey_population_dynamics = populations_alley_competition['prey']
     predator_population_dynamics = populations_alley_competition['predator']
