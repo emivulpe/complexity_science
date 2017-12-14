@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 
 
 def setup_parser():
-
     """
     A function to setup a command-line arguments parser.
 
@@ -21,7 +20,8 @@ def setup_parser():
     parser.add_argument("-eta", dest="proportionality_constant", type=float, default=2.006, help="the proportionality constant")
     parser.add_argument("-ts", dest="time_step", type=float, default=0.1, help="the time step for the Runge-Kutta method")
     parser.add_argument("-ti", dest="time_interval", type=int, default=19500, help="the time interval for the Runge-Kutta method")
-    parser.add_argument("-m", dest="method", type=str, default="rc", help="the method to calculate the differential equations for the predator and the prey population change", choices=["rc", "ie"])
+    parser.add_argument("-m", dest="method", type=str, default="rc",
+                        help="the method to calculate the differential equations for the predator and the prey population change", choices=["rc", "ie"])
 
     return parser.parse_args()
 
@@ -81,8 +81,7 @@ class PredatorPreyModel(object):
         return (predators * self.predator_growth_rate * prey * (
         predators / (predators + self.B) * (1 - predators / (self.eta * prey)))) - self.predator_death_rate * predators
 
-    def improved_euler(self,
-                       time_step=0.02, time_interval=100):
+    def improved_euler(self, time_step=0.02, time_interval=100):
         """
         Improved Euler method for the change functions of the predator and prey population.
 
@@ -148,7 +147,9 @@ class PredatorPreyModel(object):
         :return: the predator portion of the fixed point
         """
 
-        return (self.prey_growth_rate / (self.prey_death_rate * self.eta)) + ((self.predator_death_rate / self.predator_growth_rate) * ((self.prey_growth_rate + (self.prey_death_rate * self.B)) / self.prey_growth_rate))
+        return (self.prey_growth_rate / (self.prey_death_rate * self.eta)) + \
+               ((self.predator_death_rate / self.predator_growth_rate) *
+               ((self.prey_growth_rate + (self.prey_death_rate * self.B)) / self.prey_growth_rate))
 
     def compute_prey_fp(self):
         """
@@ -285,8 +286,10 @@ def main():
     args = setup_parser()
 
     # Setup the model
-    model = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
-                           predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
+    model = PredatorPreyModel(prey=args.prey, predators=args.predators,
+                              prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
+                              predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate,
+                              B=args.allee_constant, eta=args.proportionality_constant)
 
     # Determine which method to use for the differential equations
     if args.method is "rc":
