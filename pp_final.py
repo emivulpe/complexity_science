@@ -110,7 +110,7 @@ class PredatorPreyModel(object):
     def compute_prey_fp(self):
         return self.prey_growth_rate / self.prey_death_rate
 
-    def compute_fixed_points(self):
+    def compute_fixed_point(self):
         return (self.compute_predator_fp(), self.compute_prey_fp())
 
     def compute_trace(self):
@@ -136,47 +136,41 @@ class PredatorPreyModel(object):
             return "centre"
         else:
             trace = self.compute_trace()
-            print (trace)
             if trace < -10**-10:
                 return "stable"
             elif trace > 10**-10:
                 return "unstable"
             else:
                 return "centre"
+def draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, fixed_point, fixed_point_type):
 
-
-def main():
-    args = setup_parser()
-
-    gc = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
-                           predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
-
-
-    populations_alley_competition = gc.runge_kutta(gc.prey_change_alley_competition, gc.predator_change_alley_competition, args.time_step, args.time_interval)
-
-    prey_populations_alley_competition = populations_alley_competition['prey']
-    predator_populations_alley_competition = populations_alley_competition['predator']
     fig = plt.figure(figsize=(15, 5))
     fig.subplots_adjust(wspace=0.5, hspace=0.3)
     ax1 = fig.add_subplot(1, 2, 1)
     ax2 = fig.add_subplot(1, 2, 2)
 
-    ax1.plot(predator_populations_alley_competition, 'r-', label='predator')
-    ax1.plot(prey_populations_alley_competition, 'b-', label='prey')
+    ax1.plot(predator_population_dynamics, 'r-', label='predator')
+    ax1.plot(prey_population_dynamics, 'b-', label='prey')
     ax1.set_title("Dynamics in time")
     ax1.set_xlabel("time")
     ax1.grid()
     ax1.legend(loc='best')
 
-    ax2.plot(prey_populations_alley_competition, predator_populations_alley_competition, color="blue")
+    ax2.plot(prey_population_dynamics, predator_population_dynamics, color="blue")
     ax2.set_xlabel("prey")
     ax2.set_ylabel("predator")
     ax2.set_title("Phase space")
     ax2.grid()
-    fixed_point = gc.compute_fixed_points()
-    fixed_point_type = gc.fixed_point_type()
-    facecolors='g'
-    edgecolors='g'
+
+    facecolors, edgecolors = setup_fixed_point(fixed_point_type)
+    
+    ax2.scatter(fixed_point[0], fixed_point[1], facecolors=facecolors, edgecolors=edgecolors, s=55)
+
+    plt.show()
+
+def setup_fixed_point(fixed_point_type):
+    facecolors = 'g'
+    edgecolors = 'g'
     if fixed_point_type is 'stable':
         facecolors = 'r'
         edgecolors = 'r'
@@ -187,21 +181,27 @@ def main():
         facecolors = 'y'
         edgecolors = 'y'
 
-    ax2.scatter(fixed_point[0], fixed_point[1], facecolors=facecolors, edgecolors=edgecolors, s=55)
-    print (gc.fixed_point_type())
-    print (fixed_point)
-
-    plt.show()
+    return facecolors, edgecolors
 
 
+
+
+def main():
+    args = setup_parser()
+
+    model = PredatorPreyModel(prey=args.prey, predators=args.predators, prey_growth_rate=args.prey_growth_rate, prey_death_rate=args.prey_death_rate,
+                           predator_growth_rate=args.predator_growth_rate, predator_death_rate=args.predator_death_rate, B=args.allee_constant, eta=args.proportionality_constant)
+
+
+    populations_alley_competition = model.runge_kutta(model.prey_change_alley_competition, model.predator_change_alley_competition, args.time_step, args.time_interval)
+
+    prey_population_dynamics = populations_alley_competition['prey']
+    predator_population_dynamics = populations_alley_competition['predator']
+    fixed_point = model.compute_fixed_point()
+    fixed_point_type = model.fixed_point_type()
+    print ("The fixed point is ({:.2f}, {:.2f}) and it is {}.".format(fixed_point[0], fixed_point[1], fixed_point_type))
+    draw_dynamics_plots(prey_population_dynamics, predator_population_dynamics, fixed_point, fixed_point_type)
 
 if __name__ == "__main__":
     main()
 
-
-
-
-
-# TODO Add code to determine if a fixed point is stable
-# TODO Add cli
-# Fix center dynamics
