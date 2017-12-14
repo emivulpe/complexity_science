@@ -20,7 +20,7 @@ The script runs with Python v3.6.
 Running command
 ---------------
 
-python predator_prey.py
+python pp_allee_and_competition.py
 
 optional arguments:
   -h, --help            show this help message and exit
